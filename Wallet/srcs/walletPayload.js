@@ -7,7 +7,7 @@ class WalletPayload {
     }
 
     static fromBytes (payload) {
-        payload = Buffer.from(payload).toString().split(',');
+        payload = payload.toString().split(',');
         if (payload.length === 2) {
             let walletPayload = new WalletPayload(payload[0], payload[1]);
             if (!walletPayload.action)

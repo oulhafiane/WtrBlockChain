@@ -1,5 +1,4 @@
 const fetch = require('node-fetch');
-const cbor = require('cbor')
 const { createHash } = require('crypto');
 const {protobuf} = require('sawtooth-sdk')
 const request = require('request');
@@ -26,9 +25,7 @@ switch (process.argv[2]) {
             const payload = {
                 action: "deposit",
                 amount: parseInt(process.argv[3])
-            }
-
-            const payloadBytes = cbor.encode(payload)
+            }.finish();
 
             const transactionHeaderBytes = protobuf.TransactionHeader.encode({
                 familyName: 'wallet-family',
@@ -38,7 +35,7 @@ switch (process.argv[2]) {
                 signerPublicKey: signer.getPublicKey().asHex(),
                 batcherPublicKey: signer.getPublicKey().asHex(),
                 dependencies: [],
-                payloadSha512: createHash('sha512').update(payloadBytes).digest('hex')
+                payloadSha512: createHash('sha512').update(payload).digest('hex')
             }).finish()
 
             let signature = signer.sign(transactionHeaderBytes)
@@ -46,7 +43,7 @@ switch (process.argv[2]) {
             const transaction = protobuf.Transaction.create({
                 header: transactionHeaderBytes,
                 headerSignature: signature,
-                payload: payloadBytes
+                payload: payload
             })
 
             const transactions = [transaction]
