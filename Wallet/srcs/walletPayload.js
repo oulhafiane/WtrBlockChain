@@ -1,27 +1,24 @@
 const { InvalidTransaction } = require('sawtooth-sdk').exceptions;
+const cbor = require('cbor');
 
 class WalletPayload {
-    constructor (action, amount) {
-        this.action = action;
-        this.amount = amount;
-    }
+	constructor (action, amount) {
+		this.action = action;
+		this.amount = amount;
+	}
 
-    static fromBytes (payload) {
-        payload = payload.toString().split(',');
-        if (payload.length === 2) {
-            let walletPayload = new WalletPayload(payload[0], payload[1]);
-            if (!walletPayload.action)
-                throw new InvalidTransaction("Action not found.");
-            if (!walletPayload.amount)
-                throw new InvalidTransaction("Amount not found.");
-            
-            return walletPayload;
-        } else {
-            throw new InvalidTransaction("Invalid payload serialization : " + payload);
-        }
-    }
+	static fromBytes (payload) {
+		payload = cbor.decodeFirstSync(payload);
+		let walletPayload = new WalletPayload(payload.action, payload.amount);
+		if (!walletPayload.action)
+			throw new InvalidTransaction("Action not found.");
+		if (!walletPayload.amount)
+			throw new InvalidTransaction("Amount not found.");
+
+		return walletPayload;
+	}
 }
 
 module.exports = {
-    WalletPayload
+	WalletPayload
 }

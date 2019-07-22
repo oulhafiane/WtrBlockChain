@@ -1,6 +1,6 @@
 const { InvalidTransaction } = require('sawtooth-sdk').exceptions;
 
-class walletState {
+class WalletState {
     constructor (context, address) {
         this.context = context;
         this.timeout = 500;
@@ -29,5 +29,5 @@ class walletState {
 }
 
 module.exports = {
-    walletState
+    WalletState
 }
