@@ -25,7 +25,9 @@ switch (process.argv[2]) {
             const payload = {
                 action: "deposit",
                 amount: parseInt(process.argv[3])
-            }.finish();
+            };
+
+            const payloadBytes = cbor.encode(payload);  
 
             const transactionHeaderBytes = protobuf.TransactionHeader.encode({
                 familyName: 'wallet-family',
@@ -33,7 +35,7 @@ switch (process.argv[2]) {
                 signerPublicKey: signer.getPublicKey().asHex(),
                 batcherPublicKey: signer.getPublicKey().asHex(),
                 dependencies: [],
-                payloadSha512: createHash('sha512').update(payload).digest('hex')
+                payloadSha512: createHash('sha512').update(payloadBytes).digest('hex')
             }).finish()
 
             let signature = signer.sign(transactionHeaderBytes)
@@ -41,7 +43,7 @@ switch (process.argv[2]) {
             const transaction = protobuf.Transaction.create({
                 header: transactionHeaderBytes,
                 headerSignature: signature,
-                payload: payload
+                payload: payloadBytes
             })
 
             const transactions = [transaction]
