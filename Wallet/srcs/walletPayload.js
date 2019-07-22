@@ -17,7 +17,7 @@ class WalletPayload {
             
             return walletPayload;
         } else {
-            throw new InvalidTransaction("Invalid payload serialization");
+            throw new InvalidTransaction("Invalid payload serialization : " + payload);
         }
     }
 }
