@@ -69,7 +69,7 @@ switch (process.argv[2]) {
             }).finish()
 
             request.post({
-                url: 'http://10.11.100.1:8008/batches',
+                url: 'http://127.0.0.1:8008/batches',
                 body: batchListBytes,
                 headers: {'Content-Type': 'application/octet-stream'}
             }, (err, response) => {
@@ -84,7 +84,7 @@ switch (process.argv[2]) {
 }
 
 function getBalance() {
-    fetch('http://10.11.100.1:8008/state/' + address, {
+    fetch('http://127.0.0.1:8008/state/' + address, {
         method: 'GET',
     })
         .then((response) => response.json())

@@ -2,7 +2,7 @@ const { TransactionHandler } = require('sawtooth-sdk/processor/handler');
 const { InternalError, InvalidTransaction } = require('sawtooth-sdk').exceptions;
 const { decodeData, hash} = require('../lib/helper');
 
-const FAMILY_NAME = "", VERSION = "1.0", NAMESPACE = hash(FAMILY_NAME).substring(0, 6);
+const FAMILY_NAME = "wallet-family", VERSION = "1.0", NAMESPACE = hash(FAMILY_NAME).substring(0, 6);
 
 class WalletHandler extends TransactionHandler {
     constructor() {
@@ -53,7 +53,7 @@ class WalletHandler extends TransactionHandler {
                 }
             })
             .catch((err) => {
-                throw new InternalError("Error while decoding the payload.");
+                throw new InternalError("Error while decoding the payload: " + err);
             });
 
     }
