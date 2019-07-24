@@ -26,7 +26,7 @@ class WalletState {
 
     deposit(amountToDeposit) {
         this.getBalance().then((amount) => {
-            let newAmout = amountToDeposit + amount;
+            let newAmout = amountToDeposit;
             let data = _serialize(newAmout.toString());
             let entries = {
                 [this.address]: data
