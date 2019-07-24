@@ -10,7 +10,7 @@ class WalletState {
     getBalance () {
         return this.context.getState([this.address], this.timeout)
             .then((amounts) => {
-                amount = amounts[this.address];
+                let amount = amounts[this.address];
                 if (amount) {
                     console.log("you balance is : " + _deserialize(amount['data']) + " ==> " + JSON.stringify(amount));
                     return amount;
