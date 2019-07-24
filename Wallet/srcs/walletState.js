@@ -34,7 +34,7 @@ const _serialize = (amount) => {
     let data = [];
     data.push(['funds', amount].join(','));
     
-    return Buffer.from(data.join('|'));
+    return Buffer.from(data);
 }
 
 const _hash = (x) =>
