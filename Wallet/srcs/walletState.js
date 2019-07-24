@@ -20,9 +20,11 @@ class WalletState {
     }
 
     deposit (amountToDeposit) {
-        let newAmout = amountToDeposit;
+        let newAmout = amountToDeposit.toString();
+        let date = new Date();
+        let newState = date.toString() + "," + newAmout;
         let entries = {
-            [this.address]: "deposit," + newAmout.toString()
+            [this.address]: Buffer.from(newState).toString('base64')
         }
 
         return this.context.setState(entries, this.timeout);
