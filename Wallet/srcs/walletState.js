@@ -20,6 +20,7 @@ class WalletState {
     }
 
     deposit (amountToDeposit) {
+        this.getBalance();
         let newAmout = amountToDeposit.toString();
         let data = _serialize(newAmout);
         let entries = {
@@ -34,7 +35,7 @@ const _serialize = (amount) => {
     let data = [];
     data.push(['funds', amount].join(','));
     
-    return Buffer.from(data);
+    return Buffer.from(data.join(''));
 }
 
 const _hash = (x) =>
