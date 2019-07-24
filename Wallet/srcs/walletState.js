@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const { InvalidTransaction } = require('sawtooth-sdk').exceptions;
 
 class WalletState {
     constructor (context, user) {
@@ -19,12 +20,12 @@ class WalletState {
                 }
             })
             .catch((error) => {
-                console.log(error);
+                throw new InvalidTransaction(error);
             })
     }
 
     deposit (amountToDeposit) {
-        let newAmout = amountToDeposit + this.getBalance();
+        let newAmout = amountToDeposit + this.getBalance().then((amount) => amount);
         let data = _serialize(newAmout.toString());
         let entries = {
             [this.address]: data
