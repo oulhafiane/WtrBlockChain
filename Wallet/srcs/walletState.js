@@ -5,14 +5,13 @@ class WalletState {
         this.context = context;
         this.timeout = 500;
         this.address = _makeWalletAddress(user);
-        console.log("hahia l adresss : " + this.address);
     }
 
     getBalance () {
         return this.context.getState(this.address, this.timeout)
             .then((amount) => {
                 if (amount) {
-                    console.log("you balance is : " + amount);
+                    console.log("you balance is : " + amount + " ==> " + JSON.stringify(amount));
                     return amount;
                 } else {
                     return 0;
@@ -21,8 +20,7 @@ class WalletState {
     }
 
     deposit (amountToDeposit) {
-      //  let newAmount = this.getBalance() + amountToDeposit;
-        let newAmount = 124;
+        let newAmount = this.getBalance() + amountToDeposit;
         let entries = {
             [this.address]: newAmount
         }
