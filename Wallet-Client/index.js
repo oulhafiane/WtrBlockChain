@@ -5,6 +5,7 @@ const request = require('request');
 const { createContext, CryptoFactory } = require('sawtooth-sdk/signing')
 const { Secp256k1PrivateKey } = require('sawtooth-sdk/signing/secp256k1')	
 const { InternalError } = require('sawtooth-sdk').exceptions;
+const cbor = require('cbor');
 
 const hash = (x) => createHash('sha512').update(x).digest('hex').toLocaleLowerCase().substring(0, 64);
 
