@@ -5,7 +5,7 @@ class WalletState {
         this.context = context;
         this.timeout = 500;
         this.address = _makeWalletAddress(user);
-        console.log("hahia l adresss : " + address);
+        console.log("hahia l adresss : " + this.address);
     }
 
     getBalance () {
