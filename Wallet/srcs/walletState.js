@@ -9,9 +9,10 @@ class WalletState {
 
     getBalance () {
         return this.context.getState([this.address], this.timeout)
-            .then((amount) => {
+            .then((amounts) => {
+                amount = amounts[this.address];
                 if (amount) {
-                    console.log("you balance is : " + amount + " ==> " + JSON.stringify(amount));
+                    console.log("you balance is : " + _deserialize(amount['data']) + " ==> " + JSON.stringify(amount));
                     return amount;
                 } else {
                     return 0;
@@ -32,6 +33,13 @@ class WalletState {
 
         return this.context.setState(entries, this.timeout);
     }
+}
+
+const _deserialize = (data) => {
+    data = Buffer.from(data, 'base64');
+    amount = data.split(',')[1];
+
+    return amount;
 }
 
 const _serialize = (amount) => {
