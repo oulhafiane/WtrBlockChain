@@ -11,7 +11,7 @@ const hash = (x) => createHash('sha512').update(x).digest('hex').toLocaleLowerCa
 
 const context = createContext('secp256k1')
 //const privateKeyStrBuf = "03ceccecc4e8c760180bc6e3ed0ef310e653667214e0bce814ddb3fbfe3fa19f";
-const privateKeyStrBuf = "0217f03506992566092d679dbdb8c459d20cd197240d0a0fcfb591af218c7288";
+const privateKeyStrBuf = "0217f03506992566092d679dbdb8c459d20cd197240d0a0fcfb591af218c72ii";
 const privateKeyStr = privateKeyStrBuf.toString().trim();
 const privateKey = Secp256k1PrivateKey.fromHex(privateKeyStr);
 const signer = new CryptoFactory(context).newSigner(privateKey)

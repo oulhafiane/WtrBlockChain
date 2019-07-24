@@ -8,8 +8,8 @@ class WalletState {
         this.address = _makeWalletAddress(user);
     }
 
-    async getBalance() {
-        return await this.context.getState([this.address], this.timeout)
+    getBalance() {
+        return this.context.getState([this.address], this.timeout)
             .then((amounts) => {
                 let amount = amounts[this.address];
                 if (amount) {
@@ -25,13 +25,15 @@ class WalletState {
     }
 
     deposit(amountToDeposit) {
-        let newAmout = amountToDeposit + this.getBalance();
-        let data = _serialize(newAmout.toString());
-        let entries = {
-            [this.address]: data
-        }
+        this.getBalance().then((amount) => {
+            let newAmout = amountToDeposit + amount;
+            let data = _serialize(newAmout.toString());
+            let entries = {
+                [this.address]: data
+            }
 
-        return this.context.setState(entries, this.timeout);
+            return this.context.setState(entries, this.timeout);
+        });
     }
 }
 
