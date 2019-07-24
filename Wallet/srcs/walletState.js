@@ -21,7 +21,7 @@ class WalletState {
     }
 
     deposit (amountToDeposit) {
-        newAmount = this.getBalance() + amountToDeposit;
+        let newAmount = this.getBalance() + amountToDeposit;
         console.log("rah dkhalna hnaaa o hahia l address : " + this.address);
         let entries = {
             [this.address]: newAmount
