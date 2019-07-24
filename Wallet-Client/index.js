@@ -10,7 +10,8 @@ const cbor = require('cbor');
 const hash = (x) => createHash('sha512').update(x).digest('hex').toLocaleLowerCase().substring(0, 64);
 
 const context = createContext('secp256k1')
-const privateKeyStrBuf = "03ceccecc4e8c760180bc6e3ed0ef310e653667214e0bce814ddb3fbfe3fa19f";
+//const privateKeyStrBuf = "03ceccecc4e8c760180bc6e3ed0ef310e653667214e0bce814ddb3fbfe3fa19f";
+const privateKeyStrBuf = "0217f03506992566092d679dbdb8c459d20cd197240d0a0fcfb591af218c72aa";
 const privateKeyStr = privateKeyStrBuf.toString().trim();
 const privateKey = Secp256k1PrivateKey.fromHex(privateKeyStr);
 const signer = new CryptoFactory(context).newSigner(privateKey)
@@ -92,7 +93,6 @@ function getBalance() {
         .then((response) => response.json())
         .then((responseJson) => {
             var data = responseJson.data;
-            console.log(data);
             if (data) {
                 var amount = new Buffer.from(data, 'base64').toString();
                 console.log(amount);

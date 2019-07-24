@@ -17,6 +17,9 @@ class WalletState {
                     return 0;
                 }
             })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     deposit (amountToDeposit) {
