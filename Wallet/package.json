@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "cbor": "^4.1.5",
-    "sawtooth-sdk": "^1.0.5",
-    "utf8": "^3.0.0"
+    "sawtooth-sdk": "^1.0.5"
   }
 }

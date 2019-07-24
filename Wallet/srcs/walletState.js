@@ -1,5 +1,4 @@
 const crypto = require('crypto');
-const utf8 = require('utf8');
 
 class WalletState {
     constructor (context, user) {
@@ -22,9 +21,8 @@ class WalletState {
 
     deposit (amountToDeposit) {
         let newAmout = amountToDeposit;
-        let strNewAmount = newAmout.toString();
         let entries = {
-            [this.address]: utf8.encode(strNewAmount)
+            [this.address]: "deposit," + newAmout.toString()
         }
 
         return this.context.setState(entries, this.timeout);
