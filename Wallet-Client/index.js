@@ -11,7 +11,7 @@ const hash = (x) => createHash('sha512').update(x).digest('hex').toLocaleLowerCa
 
 const context = createContext('secp256k1')
 //const privateKeyStrBuf = "03ceccecc4e8c760180bc6e3ed0ef310e653667214e0bce814ddb3fbfe3fa19f";
-const privateKeyStrBuf = "0217f03506992566092d679dbdb8c459d20cd197240d0a0fcfb591af218c72aa";
+const privateKeyStrBuf = "0217f03506992566092d679dbdb8c459d20cd197240d0a0fcfb591af218c72ab";
 const privateKeyStr = privateKeyStrBuf.toString().trim();
 const privateKey = Secp256k1PrivateKey.fromHex(privateKeyStr);
 const signer = new CryptoFactory(context).newSigner(privateKey)
@@ -35,12 +35,6 @@ switch (process.argv[2]) {
             const transactionHeaderBytes = protobuf.TransactionHeader.encode({
                 familyName: 'wallet-family',
                 familyVersion: '1.0',
-                outputs: [address],
-                inputs: [
-                            'bb021ec3f530ef1153d68c79e86bb78004a61b907fe5d9b3e963ba376256f294631fa7',
-                            '02f542f661b767459af08cac3ea2d753e5bfb57d5abfd7092ec43a8b0b5c11b537',
-                            '0291a7e79dd9608017b806b0fa38e388721ebd94895bb907779ce038793417c880'
-                        ],
                 signerPublicKey: signer.getPublicKey().asHex(),
                 nonce: date + "," + Math.random(),
                 batcherPublicKey: signer.getPublicKey().asHex(),
