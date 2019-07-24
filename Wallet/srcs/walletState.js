@@ -12,7 +12,8 @@ class WalletState {
             .then((amounts) => {
                 let amount = amounts[this.address];
                 if (amount) {
-                    console.log("you balance is : " + _deserialize(amount['data'][0]) + " ==> " + JSON.stringify(amount));
+                    amount = _deserialize(amount);
+                    console.log("you balance is : " + amount);
                     return amount;
                 } else {
                     return 0;
@@ -24,9 +25,8 @@ class WalletState {
     }
 
     deposit (amountToDeposit) {
-        this.getBalance();
-        let newAmout = amountToDeposit.toString();
-        let data = _serialize(newAmout);
+        let newAmout = amountToDeposit + this.getBalance();
+        let data = _serialize(newAmout.toString());
         let entries = {
             [this.address]: data
         }
@@ -36,7 +36,6 @@ class WalletState {
 }
 
 const _deserialize = (data) => {
-    data = Buffer.from(data, 'base64');
     amount = data.split(',')[1];
 
     return amount;
