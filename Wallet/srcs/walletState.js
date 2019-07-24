@@ -21,13 +21,12 @@ class WalletState {
     }
 
     deposit (amountToDeposit) {
-        let newAmount = this.getBalance() + amountToDeposit;
-        console.log("rah dkhalna hnaaa o hahia l address : " + this.address);
+      //  let newAmount = this.getBalance() + amountToDeposit;
+        let newAmount = amountToDeposit;
         let entries = {
             [this.address]: newAmount
         }
 
-        console.log('o rah wslana ta hna 3awtani 2/2');
         return this.context.setState(entries, this.timeout);
     }
 }
