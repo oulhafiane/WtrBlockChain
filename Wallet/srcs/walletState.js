@@ -22,7 +22,7 @@ class WalletState {
 
     deposit (amountToDeposit) {
       //  let newAmount = this.getBalance() + amountToDeposit;
-        let newAmount = amountToDeposit;
+        let newAmount = 124;
         let entries = {
             [this.address]: newAmount
         }
