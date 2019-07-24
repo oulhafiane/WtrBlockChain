@@ -21,11 +21,8 @@ class WalletState {
 
     deposit (amountToDeposit) {
         let newAmout = amountToDeposit.toString();
-        console.log("new amout : " + newAmout);
-        console.log(newAmout);
-        console.log(newAmout.toString());
         let entries = {
-            [this.address]: newAmout
+            [this.address]: btoa(newAmout)
         }
 
         return this.context.setState(entries, this.timeout);
