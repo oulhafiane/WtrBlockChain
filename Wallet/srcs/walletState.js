@@ -21,14 +21,20 @@ class WalletState {
 
     deposit (amountToDeposit) {
         let newAmout = amountToDeposit.toString();
-        let date = new Date();
-        let newState = date.toString() + "," + newAmout;
+        let data = _serialize(newAmout);
         let entries = {
-            [this.address]: Buffer.from(newState).toString('base64')
+            [this.address]: data
         }
 
         return this.context.setState(entries, this.timeout);
     }
+}
+
+const _serialize = (amount) => {
+    let data = [];
+    data.push(['funds', amount].join(','));
+    
+    return Buffer.from(data.join('|'));
 }
 
 const _hash = (x) =>
