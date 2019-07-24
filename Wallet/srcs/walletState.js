@@ -21,7 +21,7 @@ class WalletState {
 
     deposit (amountToDeposit) {
         let entries = {
-            [this.address]: "blabla" + amountToDeposit
+            [this.address]: amountToDeposit.toString()
         }
 
         return this.context.setState(entries, this.timeout);
