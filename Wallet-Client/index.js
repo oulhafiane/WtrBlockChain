@@ -33,6 +33,8 @@ switch (process.argv[2]) {
             const transactionHeaderBytes = protobuf.TransactionHeader.encode({
                 familyName: 'wallet-family',
                 familyVersion: '1.0',
+                inputs: [address],
+                outputs: [address],
                 signerPublicKey: signer.getPublicKey().asHex(),
                 batcherPublicKey: signer.getPublicKey().asHex(),
                 dependencies: [],
