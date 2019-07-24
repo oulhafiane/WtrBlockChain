@@ -5,6 +5,7 @@ class WalletState {
         this.context = context;
         this.timeout = 500;
         this.address = address;
+        console.log("hahia l adresss : " + address);
     }
 
     getBalance () {
@@ -20,10 +21,12 @@ class WalletState {
 
     deposit (amountToDeposit) {
         oldAmount = this.getBalance();
+        console.log("rah dkhalna hnaaa o hahia l address : " + this.address)l
         let entries = {
             [this.address]: oldAmount + amountToDeposit
         }
 
+        console.log('o rah wslana ta hna 3awtani 2/2');
         return this.context.setState(entries, this.timeout);
     }
 }
