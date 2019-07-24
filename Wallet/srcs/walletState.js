@@ -20,9 +20,8 @@ class WalletState {
     }
 
     deposit (amountToDeposit) {
-        let newAmount = this.getBalance() + amountToDeposit;
         let entries = {
-            [this.address]: newAmount
+            [this.address]: amountToDeposit
         }
 
         return this.context.setState(entries, this.timeout);
