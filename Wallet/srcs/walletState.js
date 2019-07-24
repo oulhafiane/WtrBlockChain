@@ -2,13 +2,13 @@ const crypto = require('crypto');
 const { InvalidTransaction } = require('sawtooth-sdk').exceptions;
 
 class WalletState {
-    constructor (context, user) {
+    constructor(context, user) {
         this.context = context;
         this.timeout = 500;
         this.address = _makeWalletAddress(user);
     }
 
-    getBalance () {
+    getBalance() {
         return this.context.getState([this.address], this.timeout)
             .then((amounts) => {
                 let amount = amounts[this.address];
@@ -24,26 +24,28 @@ class WalletState {
             })
     }
 
-    deposit (amountToDeposit) {
-        let newAmout = amountToDeposit + this.getBalance().then((amount) => amount);
-        let data = _serialize(newAmout.toString());
-        let entries = {
-            [this.address]: data
-        }
+    deposit(amountToDeposit) {
+        this.getBalance().then((amount) => {
+            let newAmout = amountToDeposit + amount;
+            let data = _serialize(newAmout.toString());
+            let entries = {
+                [this.address]: data
+            }
 
-        return this.context.setState(entries, this.timeout);
+            return this.context.setState(entries, this.timeout);
+        });
     }
 }
 
 const _serialize = (amount) => {
     let data = [];
     data.push([amount].join(''));
-    
+
     return Buffer.from(data.join(''));
 }
 
 const _hash = (x) =>
-  crypto.createHash('sha512').update(x).digest('hex').toLowerCase().substring(0, 64)
+    crypto.createHash('sha512').update(x).digest('hex').toLowerCase().substring(0, 64)
 
 const FAMILY_NAME = 'wallet-family'
 
