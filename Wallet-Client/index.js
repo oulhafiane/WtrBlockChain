@@ -27,7 +27,6 @@ switch (process.argv[2]) {
             let date = new Date();
             const payload = {
                 action: "deposit",
-                date: date,
                 amount: parseInt(process.argv[3])
             };
 
@@ -36,7 +35,9 @@ switch (process.argv[2]) {
             const transactionHeaderBytes = protobuf.TransactionHeader.encode({
                 familyName: 'wallet-family',
                 familyVersion: '1.0',
+                outputs: [address],
                 signerPublicKey: signer.getPublicKey().asHex(),
+                nonce: date + "," + Math.random(),
                 batcherPublicKey: signer.getPublicKey().asHex(),
                 dependencies: [],
                 payloadSha512: createHash('sha512').update(payloadBytes).digest('hex')
