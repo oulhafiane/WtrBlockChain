@@ -23,8 +23,10 @@ switch (process.argv[2]) {
         break;
     case "deposit":
         if (process.argv[3] && !isNaN(process.argv[3])) {
+            let date = new Date();
             const payload = {
                 action: "deposit",
+                date: date,
                 amount: parseInt(process.argv[3])
             };
 
