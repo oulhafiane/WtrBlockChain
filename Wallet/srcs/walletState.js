@@ -1,10 +1,10 @@
-const { InvalidTransaction } = require('sawtooth-sdk').exceptions;
+const crypto = require('crypto');
 
 class WalletState {
-    constructor (context, address) {
+    constructor (context, user) {
         this.context = context;
         this.timeout = 500;
-        this.address = address;
+        this.address = _makeWalletAddress(user);
         console.log("hahia l adresss : " + address);
     }
 
@@ -12,6 +12,7 @@ class WalletState {
         return this.context.getState(this.address, this.timeout)
             .then((amount) => {
                 if (amount) {
+                    console.log("you balance is : " + amount);
                     return amount;
                 } else {
                     return 0;
@@ -20,10 +21,10 @@ class WalletState {
     }
 
     deposit (amountToDeposit) {
-        oldAmount = this.getBalance();
+        newAmount = this.getBalance() + amountToDeposit;
         console.log("rah dkhalna hnaaa o hahia l address : " + this.address);
         let entries = {
-            [this.address]: oldAmount + amountToDeposit
+            [this.address]: newAmount
         }
 
         console.log('o rah wslana ta hna 3awtani 2/2');
@@ -31,6 +32,18 @@ class WalletState {
     }
 }
 
+const _hash = (x) =>
+  crypto.createHash('sha512').update(x).digest('hex').toLowerCase().substring(0, 64)
+
+const FAMILY_NAME = 'wallet-family'
+
+const NAMESPACE = _hash(FAMILY_NAME).substring(0, 6)
+
+const _makeWalletAddress = (x) => NAMESPACE + _hash(x)
+
+
 module.exports = {
+    NAMESPACE,
+    FAMILY_NAME,
     WalletState
 }
