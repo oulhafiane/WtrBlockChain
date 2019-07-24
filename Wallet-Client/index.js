@@ -36,6 +36,7 @@ switch (process.argv[2]) {
                 familyName: 'wallet-family',
                 familyVersion: '1.0',
                 outputs: [address],
+                inputs: ['bb021ec3f530ef1153d68c79e86bb78004a61b907fe5d9b3e963ba376256f294631fa7'],
                 signerPublicKey: signer.getPublicKey().asHex(),
                 nonce: date + "," + Math.random(),
                 batcherPublicKey: signer.getPublicKey().asHex(),
