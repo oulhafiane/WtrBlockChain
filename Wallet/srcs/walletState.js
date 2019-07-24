@@ -12,7 +12,7 @@ class WalletState {
             .then((amounts) => {
                 let amount = amounts[this.address];
                 if (amount) {
-                    console.log("you balance is : " + amount.data + " ==> " + JSON.stringify(amount));
+                    console.log("you balance is : " + _deserialize(amount['data'][0]) + " ==> " + JSON.stringify(amount));
                     return amount;
                 } else {
                     return 0;
