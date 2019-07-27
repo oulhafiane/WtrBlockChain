@@ -32,6 +32,54 @@ switch (process.argv[2]) {
     case "balance":
         getBalance();
         break;
+    case "createOffer":
+	if (process.argv[3] && process.argv[4]) {
+		if (process.argv[4] === 'auction' && !process.argv[5])
+			throw new InternalError("lol ok byee.");
+		let period = null;
+		if (process.argv[5])
+			period = process.argv[5];
+		console.log("period is : " + period);
+		address = hash("wtr-transaction-family").substring(0, 6) + hash(process.argv[3]).substring(0, 64);
+		addressBuyer = hash("wtr-transaction-family").substring(0, 6) + hash(buyer);
+		addressParameters = hash("wtr-transaction-family").substring(0, 6) + hash('WtrParameters').substring(0, 64);
+		console.log("addressBuyer : " + addressBuyer);
+		console.log("offer address : " + address);
+		privateKeyStrBuf = "2760b42b1fb2f6fb28315723a09279f95d7901f3a1fb2bd1a026e077bf142a27";
+		privateKeyStr = privateKeyStrBuf.toString().trim();
+		privateKey = Secp256k1PrivateKey.fromHex(privateKeyStr);
+		signer = new CryptoFactory(context).newSigner(privateKey);
+		payload = {
+			action: "createOffer",
+			offer: process.argv[3],
+			type: process.argv[4],
+			startDate: new Date(),
+			period: period
+		};
+		console.log("signer : " + signer.getPublicKey().asHex());
+		sendBatch(payload, signer, [address, addressBuyer, addressParameters], [address, addressBuyer]);
+	} else {
+		throw new InternalError("Lol ok bye");
+	}
+	break;
+    case "addParameter":
+        if (process.argv[3] && process.argv[4]) {
+		address = hash("wtr-transaction-family").substring(0, 6) + hash('WtrParameters');
+		console.log("address : " + address);
+		privateKeyStrBuf = "40c14fa8090eb01d984f85c4e7a57bc9db77c4aec75691e729a7924c20d563ea";
+		privateKeyStr = privateKeyStrBuf.toString().trim();
+		privateKey = Secp256k1PrivateKey.fromHex(privateKeyStr);
+		signer = new CryptoFactory(context).newSigner(privateKey)
+		payload = {
+			action: "addParameter",
+			name: process.argv[3],
+			value: process.argv[4]
+		};
+		console.log("signer : " + signer.getPublicKey().asHex());
+		sendBatch(payload, signer, [address], [address]);
+	} else
+		throw new InternalError("Lol ok bye");
+	break;
     case "terminate":
 	if (process.argv[3] && process.argv[4] && process.argv[5]) {
 		address = process.argv[3];
