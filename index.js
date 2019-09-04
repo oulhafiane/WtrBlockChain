@@ -41,13 +41,13 @@ switch (process.argv[2]) {
 			address = hash("wtr-transaction-family").substring(0, 6) + hash(process.argv[3]).substring(0, 64);
 			addressAuction = hash("wtr-transaction-family").substring(0, 6) + hash(process.argv[3] + '-auction').substring(0, 64);
 			if (process.argv[2] === 'enterAuction2') {
-				privateKeyStrBuf = "1562078f47249ac2bb5d7161e4abd10e9aec80adfb075b0a79ee61c953d1fe86";
+				privateKeyStrBuf = "8360279babe3181a5c30aa3f640ee627553093022194c77817f4da7cdfa316ea";
 				addressBuyer = hash("wtr-transaction-family").substring(0, 6) + hash(bidder2);
 			} else if (process.argv[2] === 'enterAuction1') {
-				privateKeyStrBuf = "37d6e558cd7a4e21971b27c495d1701a47d8b618e54fa3ee08dd500f3be6163f";
+				privateKeyStrBuf = "1466d54822beeae4bdce77158ca7c268050b419efd28d13e2da7dee69543dc14";
 				addressBuyer = hash("wtr-transaction-family").substring(0, 6) + hash(bidder1);
 			} else {
-				privateKeyStrBuf = "7122744c74d6193bde45787812b91f0447e9cda4a8e6ea257067f17f65427956";
+				privateKeyStrBuf = "f010ca09b04b2e5f1b4f54bfa9642453af57ca48c8f1811888080cd6478eeae6";
 				addressBuyer = hash("wtr-transaction-family").substring(0, 6) + hash(seller);
 			}
 			addressParameters = hash("wtr-transaction-family").substring(0, 6) + hash('WtrParameters').substring(0, 64);
@@ -83,7 +83,7 @@ switch (process.argv[2]) {
 			console.log("addressOwner : " + addressBuyer);
 			console.log("offer address : " + address);
 			console.log("parameters address: " + addressParameters);
-			privateKeyStrBuf = "161c920b77b770d2bc3e53db93544da6af964445b2f5a123d406bff9ac0ee7f1";
+			privateKeyStrBuf = "d4105ca88be42b2e1dcf0baee7ccddbb28885051f779268eb538dd4246a49904";
 			privateKeyStr = privateKeyStrBuf.toString().trim();
 			privateKey = Secp256k1PrivateKey.fromHex(privateKeyStr);
 			signer = new CryptoFactory(context).newSigner(privateKey);
@@ -149,7 +149,7 @@ switch (process.argv[2]) {
 			addressBuyer = hash("wtr-transaction-family").substring(0, 6) + hash(buyer);
 			console.log("addressBuyer : " + addressBuyer);
 			console.log("paying address : " + address);
-			privateKeyStrBuf = "88be42b2e1dcf0baee7ccddbb28885051f779268eb538dd4246a49904";
+			privateKeyStrBuf = "d4105ca88be42b2e1dcf0baee7ccddbb28885051f779268eb538dd4246a49904";
 			privateKeyStr = privateKeyStrBuf.toString().trim();
 			privateKey = Secp256k1PrivateKey.fromHex(privateKeyStr);
 			signer = new CryptoFactory(context).newSigner(privateKey);
@@ -172,7 +172,7 @@ switch (process.argv[2]) {
 	case "mint2":
 	case "mint1":
 	case "mint":
-		if (process.argv[3]) {
+		if (process.argv[3] && !isNaN(process.argv[3])) {
 			let user;
 			if (process.argv[2] === 'mint2') {
 				address = hash("wtr-transaction-family").substring(0, 6) + hash(bidder2);
