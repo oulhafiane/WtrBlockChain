@@ -12,10 +12,10 @@ const _generateNewKey = (x) => crypto.randomBytes(x);
 
 const hash = (x) => createHash('sha512').update(x).digest('hex').toLocaleLowerCase().substring(0, 64);
 
-const buyer = '028a8ba815bacb078a1b0405af0ad29566a4e570d2bbecb450d8dc0f1708087144';
-const seller = '020ca88023d91a3625b8d4f420b047daa2c58a189d189c06e18afb6761e7a4c19c';
-const bidder1 = '02ab8153ca37a5ac804c5ecabbaa7d9e1abb603a40407beaffd8087bd65a59fb8f';
-const bidder2 = '02e1bf7b98a819fc87369fb4344667b2570e24ac0665cdabc96a94a10682a5c28c';
+const buyer = '0241aaa480b1479fa4e0c3a5aa867d739e8b4c630ad3021fe20c15676091734c52';
+const seller = '03f51efe10745aa62dc246160a67fd784542e146ab936d0ac2607fc0e5e30c8def';
+const bidder1 = '03a47c0cf547b05747f3dad8284aa6c2e18329aa5f88ee53b1a753cce68a538b73';
+const bidder2 = '02ef494dd3b77f058a62807d9fe1e2d7f30ad46c0042d80ea9f1282ee34b59e46e';
 
 const context = createContext('secp256k1')
 const nonce = new Date() + "," + Math.random();
@@ -105,7 +105,7 @@ if (process.argv[2] === 'enterAuction2') {
         if (process.argv[3] && process.argv[4]) {
 		address = hash("wtr-transaction-family").substring(0, 6) + hash('WtrParameters');
 		console.log("address : " + address);
-		privateKeyStrBuf = "40c14fa8090eb01d984f85c4e7a57bc9db77c4aec75691e729a7924c20d563ea";
+		privateKeyStrBuf = "6203828d644e3e3956a9701c7ff21dcaef4a1b293d56e24062e69531465b2ac9";
 		privateKeyStr = privateKeyStrBuf.toString().trim();
 		privateKey = Secp256k1PrivateKey.fromHex(privateKeyStr);
 		signer = new CryptoFactory(context).newSigner(privateKey)
@@ -125,7 +125,7 @@ if (process.argv[2] === 'enterAuction2') {
 		addressSeller = hash("wtr-transaction-family").substring(0, 6) + hash(seller);
 		console.log("addressSelling : " + addressSeller);
 		console.log("getting paid via address : " + address);
-		privateKeyStrBuf = "7122744c74d6193bde45787812b91f0447e9cda4a8e6ea257067f17f65427956";
+		privateKeyStrBuf = "f010ca09b04b2e5f1b4f54bfa9642453af57ca48c8f1811888080cd6478eeae6";
 		privateKeyStr = privateKeyStrBuf.toString().trim();
 		privateKey = Secp256k1PrivateKey.fromHex(privateKeyStr);
 		signer = new CryptoFactory(context).newSigner(privateKey);
@@ -149,7 +149,7 @@ if (process.argv[2] === 'enterAuction2') {
 		addressBuyer = hash("wtr-transaction-family").substring(0, 6) + hash(buyer);
 		console.log("addressBuyer : " + addressBuyer);
 		console.log("paying address : " + address);
-		privateKeyStrBuf = "161c920b77b770d2bc3e53db93544da6af964445b2f5a123d406bff9ac0ee7f1";
+		privateKeyStrBuf = "88be42b2e1dcf0baee7ccddbb28885051f779268eb538dd4246a49904";
 		privateKeyStr = privateKeyStrBuf.toString().trim();
 		privateKey = Secp256k1PrivateKey.fromHex(privateKeyStr);
 		signer = new CryptoFactory(context).newSigner(privateKey);
@@ -184,7 +184,7 @@ if (process.argv[2] === 'mint2') {
 		address = hash("wtr-transaction-family").substring(0, 6) + hash(buyer);
 		user = buyer;
 }
-		privateKeyStrBuf = "40c14fa8090eb01d984f85c4e7a57bc9db77c4aec75691e729a7924c20d563ea";
+		privateKeyStrBuf = "6203828d644e3e3956a9701c7ff21dcaef4a1b293d56e24062e69531465b2ac9";
 		console.log("address : " + address);
 		privateKeyStr = privateKeyStrBuf.toString().trim();
 		privateKey = Secp256k1PrivateKey.fromHex(privateKeyStr);
@@ -203,7 +203,7 @@ if (process.argv[2] === 'mint2') {
         if (process.argv[3] && !isNaN(process.argv[3])) {
 		const address = hash("wtr-transaction-family").substring(0, 6) + hash(seller).substring(0, 28) + hash(buyer).substring(0, 28) + hash(nonce).substring(0, 8);
 		console.log("address : " + address);
-		privateKeyStrBuf = "8ab4eb6397fca2cb2e32147e83b4b74cd86c515973e199daccdb2a18baddfd70";
+		privateKeyStrBuf = "6203828d644e3e3956a9701c7ff21dcaef4a1b293d56e24062e69531465b2ac9";
 		privateKeyStr = privateKeyStrBuf.toString().trim();
 		privateKey = Secp256k1PrivateKey.fromHex(privateKeyStr);
 		signer = new CryptoFactory(context).newSigner(privateKey)
