@@ -266,7 +266,7 @@ function sendBatch(payload, signer, listInputs, listOutputs) {
 	}).finish()
 
 	request.post({
-		url: 'http://10.11.100.81:8008/batches',
+		url: 'http://10.30.240.225:8008/batches',
 		body: batchListBytes,
 		headers: { 'Content-Type': 'application/octet-stream' }
 	}, (err, response) => {
